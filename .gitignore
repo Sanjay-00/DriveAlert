@@ -1,8 +1,8 @@
 sample.mp4
 WakeApp.mp4
 Data/sample.mp4
-Data/extracted_frames
-Data/Dataset
+Data/extracted_frames/
+Data/Dataset/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
