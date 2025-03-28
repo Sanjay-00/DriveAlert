@@ -1,7 +1,7 @@
 sample.mp4
-WakeApp.mp4
+WakeApp.mp4dvc 
 Data/sample.mp4
-Data/extracted_frames/
+extracted_frames/
 Data/Dataset/
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -132,3 +132,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/Data
