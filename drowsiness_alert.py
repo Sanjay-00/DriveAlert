@@ -1,59 +1,48 @@
-
 # Alert functions: alarm and emergency email
 
-
 # import packages
-from playsound import playsound
+import RPi.GPIO as GPIO
 import smtplib
 import ssl
-import pygame
 import pyttsx3
+import time
 
-
+# Set up GPIO for the buzzer
+BUZZER_PIN = 18  # Change this to the GPIO pin you are using for the buzzer
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUZZER_PIN, GPIO.OUT)
 
 def sound_alarm():
-    """The function plays an alarm sound twice nonstop"""
-    # Initialize pygame mixer
-    pygame.mixer.init()
-
-    # Load and play the alarm sound
-    pygame.mixer.music.load("Data/alarm2.mp3")  # Ensure the path and file extension are correct
-
-    # Play the sound once
-    pygame.mixer.music.play()
-
-    # Wait for the first play to finish
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
-
-    # Play the sound again immediately after the first one finishes
-    pygame.mixer.music.play()
-
-    # Wait for the second play to finish
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
-
-
-
-def sound_alarm2():
-    """The function plays a voice message saying 'No Driver'"""
-    # Initialize the pyttsx3 engine
-    engine = pyttsx3.init()
-
-    # Set properties (optional)
-    engine.setProperty('rate', 150)  # Speed of speech (words per minute)
-    engine.setProperty('volume', 1)  # Volume level (0.0 to 1.0)
-
-    # Speak the message
-    engine.say("Driver missing")
+    """The function activates the buzzer twice nonstop"""
+    # Activate the buzzer (turn on)
+    GPIO.output(BUZZER_PIN, GPIO.HIGH)
+    time.sleep(1)  # Buzzer on for 1 second
     
-    # Wait for the speech to finish
-    engine.runAndWait()
+    # Deactivate the buzzer (turn off)
+    GPIO.output(BUZZER_PIN, GPIO.LOW)
+    time.sleep(1)  # Buzzer off for 1 second
+
+    # Play the alarm again immediately
+    GPIO.output(BUZZER_PIN, GPIO.HIGH)
+    time.sleep(1)  # Buzzer on for 1 second
     
+    GPIO.output(BUZZER_PIN, GPIO.LOW)
+    time.sleep(1)  # Buzzer off for 1 second
 
+# def sound_alarm2():
+#     """The function plays a voice message saying 'No Driver'"""
+#     # Initialize the pyttsx3 engine
+#     engine = pyttsx3.init()
 
+#     # Set properties (optional)
+#     engine.setProperty('rate', 150)  # Speed of speech (words per minute)
+#     engine.setProperty('volume', 1)  # Volume level (0.0 to 1.0)
 
-
+#     # Speak the message
+#     engine.say("Driver missing")
+    
+#     # Wait for the speech to finish
+#     engine.runAndWait()
 
 def send_email(username, contact_name, contact_email):
     sender_email = "drivealert49@gmail.com"
@@ -68,7 +57,4 @@ def send_email(username, contact_name, contact_email):
     print(f"Email sent to {contact_email}!")
 
 # Example usage
-send_email("Sanjay", "Emergency Contact", "emergency@example.com")
-
-
-
+# send_email("Sanjay", "Emergency Contact", "emergency@example.com")

@@ -76,7 +76,7 @@ class DrowsinessDetector:
                 if no_face_counter >= NO_FACE_THRESHOLD:
                     no_face_counter = 0
                     if not alarm_on:
-                        threading.Thread(target=drowsiness_alert.sound_alarm2, daemon=True).start()
+                        threading.Thread(target=drowsiness_alert.sound_alarm, daemon=True).start()
                         alarm_on = True
                         # alarm_counter += 1
                 continue
