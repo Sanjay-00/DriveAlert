@@ -1,2 +1,2 @@
 # DriveAlert
-A ML based Driver Drowsiness Detection and Alert System 
+Driver Drowsiness Detection and Alert System 
